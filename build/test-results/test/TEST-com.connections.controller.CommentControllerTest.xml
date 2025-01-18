@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.connections.controller.CommentControllerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-01-18T16:50:59" hostname="DIEGO" time="0.276">
+  <properties/>
+  <testcase name="findById_ReturnsMonoOfComment()" classname="com.connections.controller.CommentControllerTest" time="0.229"/>
+  <testcase name="save_ReturnsSavedComment()" classname="com.connections.controller.CommentControllerTest" time="0.013"/>
+  <testcase name="deleteById_ReturnsOk()" classname="com.connections.controller.CommentControllerTest" time="0.007"/>
+  <testcase name="findAll_ReturnsFluxOfComments()" classname="com.connections.controller.CommentControllerTest" time="0.023"/>
+  <system-out><![CDATA[11:50:58.463 [Test worker] DEBUG org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [CommentControllerTest]: using SpringBootContextLoader
+11:50:58.469 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.connections.controller.CommentControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+11:50:58.469 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.connections.controller.CommentControllerTest]: CommentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:50:58.507 [Test worker] DEBUG org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTestContextBootstrapper - Using ContextCustomizers for test class [CommentControllerTest]: [DisableAutoConfigurationContextCustomizer, DisableObservabilityContextCustomizer, TypeExcludeFiltersContextCustomizer, PropertyMappingContextCustomizer, Customizer, ImportsContextCustomizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer]
+11:50:58.576 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\java\connections\build\classes\java\main\com\connections\Application.class]
+11:50:58.578 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.connections.Application for test class com.connections.controller.CommentControllerTest
+11:50:58.584 [Test worker] DEBUG org.springframework.test.context.util.TestContextSpringFactoriesUtils - Skipping candidate TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] due to a missing dependency. Specify custom TestExecutionListener classes or make the default TestExecutionListener classes and their required dependencies available. Offending class: [jakarta/servlet/ServletContext]
+11:50:58.595 [Test worker] DEBUG org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTestContextBootstrapper - Using TestExecutionListeners for test class [CommentControllerTest]: [DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
+11:50:58.596 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: class [CommentControllerTest], class annotated with @DirtiesContext [false] with mode [null]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.2)
+
+2025-01-18T11:50:58.883-05:00  INFO 4176 --- [    Test worker] c.c.controller.CommentControllerTest     : Starting CommentControllerTest using Java 18.0.1.1 with PID 4176 (started by diego in C:\java\connections)
+2025-01-18T11:50:58.885-05:00 DEBUG 4176 --- [    Test worker] c.c.controller.CommentControllerTest     : Running with Spring Boot v3.0.2, Spring v6.0.4
+2025-01-18T11:50:58.885-05:00  INFO 4176 --- [    Test worker] c.c.controller.CommentControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2025-01-18T11:50:59.966-05:00  INFO 4176 --- [    Test worker] c.c.controller.CommentControllerTest     : Started CommentControllerTest in 1.327 seconds (process running for 2.33)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

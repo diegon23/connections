@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.connections.service.CreatorServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-01-18T16:51:01" hostname="DIEGO" time="0.021">
+  <properties/>
+  <testcase name="delete_ShouldCallRepositoryAndReturnMonoVoid()" classname="com.connections.service.CreatorServiceTest" time="0.017"/>
+  <testcase name="save_ShouldReturnSavedCreatorDTO()" classname="com.connections.service.CreatorServiceTest" time="0.001"/>
+  <testcase name="findById_ShouldReturnMonoOfCreatorDTO()" classname="com.connections.service.CreatorServiceTest" time="0.001"/>
+  <testcase name="findAll_ShouldReturnFluxOfCreatorDTO()" classname="com.connections.service.CreatorServiceTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

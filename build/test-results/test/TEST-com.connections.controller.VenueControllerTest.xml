@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.connections.controller.VenueControllerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2025-01-18T16:51:01" hostname="DIEGO" time="0.031">
+  <properties/>
+  <testcase name="findAll_ReturnsFluxOfVenues()" classname="com.connections.controller.VenueControllerTest" time="0.013"/>
+  <testcase name="findById_ReturnsMonoOfVenue()" classname="com.connections.controller.VenueControllerTest" time="0.004"/>
+  <testcase name="save_ReturnsSavedVenue()" classname="com.connections.controller.VenueControllerTest" time="0.005"/>
+  <testcase name="deleteById_ReturnsOk()" classname="com.connections.controller.VenueControllerTest" time="0.005"/>
+  <system-out><![CDATA[2025-01-18T11:51:01.100-05:00  INFO 4176 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.connections.controller.VenueControllerTest]: VenueControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-01-18T11:51:01.103-05:00  INFO 4176 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.connections.Application for test class com.connections.controller.VenueControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.2)
+
+2025-01-18T11:51:01.130-05:00  INFO 4176 --- [    Test worker] c.c.controller.VenueControllerTest       : Starting VenueControllerTest using Java 18.0.1.1 with PID 4176 (started by diego in C:\java\connections)
+2025-01-18T11:51:01.130-05:00 DEBUG 4176 --- [    Test worker] c.c.controller.VenueControllerTest       : Running with Spring Boot v3.0.2, Spring v6.0.4
+2025-01-18T11:51:01.130-05:00  INFO 4176 --- [    Test worker] c.c.controller.VenueControllerTest       : No active profile set, falling back to 1 default profile: "default"
+2025-01-18T11:51:01.215-05:00  INFO 4176 --- [    Test worker] c.c.controller.VenueControllerTest       : Started VenueControllerTest in 0.109 seconds (process running for 3.58)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
