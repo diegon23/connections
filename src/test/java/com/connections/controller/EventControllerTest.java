@@ -1,9 +1,7 @@
 package com.connections.controller;
 
 import com.connections.dto.EventDTO;
-import com.connections.dto.EventDTO;
-import com.connections.service.EventService;
-import com.connections.service.EventService;
+import com.connections.service.IEventService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -29,7 +27,7 @@ class EventControllerTest {
 
     // Service Mock
     @MockBean
-    private EventService eventService;
+    private IEventService eventService;
 
     //
     @BeforeEach
@@ -39,8 +37,8 @@ class EventControllerTest {
     @Test
     void findAll_ReturnsFluxOfEvents() throws Exception {
         // DTOs to be used as mock
-        EventDTO dto1 = new EventDTO(1L, "Event One", "Test Description", LocalDateTime.now(), 1L);
-        EventDTO dto2 = new EventDTO(2L, "Event Two", "Test Description", LocalDateTime.now(), 1L);
+        EventDTO dto1 = new EventDTO(1L, "Event One", "Test Description", LocalDateTime.of(2025,1,18,11,46,31,496193900), 1L);
+        EventDTO dto2 = new EventDTO(2L, "Event Two", "Test Description", LocalDateTime.of(2025,1,18,11,46,31,496193900), 1L);
 
         Mockito.when(eventService.findAll()).thenReturn(Flux.just(dto1, dto2));
 
@@ -57,7 +55,7 @@ class EventControllerTest {
     @Test
     void findById_ReturnsMonoOfEvent() throws Exception {
         //DTO to be used as mock
-        EventDTO dto = new EventDTO(1L, "Event One", "Test Description", LocalDateTime.now(), 1L);
+        EventDTO dto = new EventDTO(1L, "Event One", "Test Description", LocalDateTime.of(2025,1,18,11,46,31,496193900), 1L);
 
         Mockito.when(eventService.findById(1L)).thenReturn(Mono.just(dto));
 
@@ -75,8 +73,8 @@ class EventControllerTest {
     @Test
     void save_ReturnsSavedEvent() {
         // DTO to be used as mock and request
-        EventDTO dtoToSave = new EventDTO(null, "Event One", "Test Description", LocalDateTime.now(), 1L);
-        EventDTO savedDto = new EventDTO(10L, "Event One", "Test Description", LocalDateTime.now(), 1L);
+        EventDTO dtoToSave = new EventDTO(null, "Event One", "Test Description", LocalDateTime.of(2025,1,18,11,46,31,496193900), 1L);
+        EventDTO savedDto = new EventDTO(10L, "Event One", "Test Description", LocalDateTime.of(2025,1,18,11,46,31,496193900), 1L);
 
         Mockito.when(eventService.save(any(EventDTO.class))).thenReturn(Mono.just(savedDto));
 

@@ -3,6 +3,7 @@ package com.connections.service;
 import com.connections.dto.RsvpDTO;
 import com.connections.entity.RsvpEntity;
 import com.connections.repository.RsvpRepository;
+import com.connections.service.impl.RsvpServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,13 +21,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
-class RsvpServiceTest {
+class RsvpServiceImplTest {
 
     @Mock
     private RsvpRepository rsvpRepository;
 
     @InjectMocks
-    private RsvpService rsvpService;
+    private RsvpServiceImpl rsvpService;
 
     private RsvpEntity entity1;
     private RsvpEntity entity2;
@@ -36,11 +37,11 @@ class RsvpServiceTest {
 
     @BeforeEach
     void setup() {
-        entity1 = new RsvpEntity(1L, 1L, 1L, "Test Status", LocalDateTime.now());
-        entity2 = new RsvpEntity(2L, 1L, 1L, "Test Status", LocalDateTime.now());
+        entity1 = new RsvpEntity(1L, 1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
+        entity2 = new RsvpEntity(2L, 1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
 
-        dto1 = new RsvpDTO(1L, 1L, 1L, "Test Status", LocalDateTime.now());
-        dto2 = new RsvpDTO(2L, 1L, 1L, "Test Status", LocalDateTime.now());
+        dto1 = new RsvpDTO(1L, 1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
+        dto2 = new RsvpDTO(2L, 1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
     }
 
     @Test
@@ -81,9 +82,9 @@ class RsvpServiceTest {
     @Test
     void save_ShouldReturnSavedRsvpDTO() {
         // Objects to use as Mock
-        RsvpEntity savedEntity   = new RsvpEntity(3L, 1L, 1L, "Test Status", LocalDateTime.now());
-        RsvpDTO dtoToSave = new RsvpDTO(null, 1L, 1L, "Test Status", LocalDateTime.now());
-        RsvpDTO expectedDTO = new RsvpDTO(3L, 1L, 1L, "Test Status", LocalDateTime.now());
+        RsvpEntity savedEntity   = new RsvpEntity(3L, 1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
+        RsvpDTO dtoToSave = new RsvpDTO(null, 1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
+        RsvpDTO expectedDTO = new RsvpDTO(3L, 1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
 
         //Mock Repository call
         Mockito.when(rsvpRepository.save(any(RsvpEntity.class)))

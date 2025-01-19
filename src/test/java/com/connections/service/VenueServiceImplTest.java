@@ -3,6 +3,7 @@ package com.connections.service;
 import com.connections.dto.VenueDTO;
 import com.connections.entity.VenueEntity;
 import com.connections.repository.VenueRepository;
+import com.connections.service.impl.VenueServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,19 +15,17 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.time.LocalDateTime;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
-class VenueServiceTest {
+class VenueServiceImplTest {
 
     @Mock
     private VenueRepository venueRepository;
 
     @InjectMocks
-    private VenueService venueService;
+    private VenueServiceImpl venueService;
 
     private VenueEntity entity1;
     private VenueEntity entity2;

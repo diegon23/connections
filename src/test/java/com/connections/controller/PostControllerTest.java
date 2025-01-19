@@ -2,8 +2,7 @@ package com.connections.controller;
 
 import com.connections.dto.CommentDTO;
 import com.connections.dto.PostDTO;
-import com.connections.service.CommentService;
-import com.connections.service.PostService;
+import com.connections.service.IPostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -30,7 +29,7 @@ class PostControllerTest {
 
     // Service Mock
     @MockBean
-    private PostService postService;
+    private IPostService postService;
 
     //
     @BeforeEach
@@ -41,8 +40,8 @@ class PostControllerTest {
     @Test
     void findAll_ReturnsFluxOfPosts() throws Exception {
         // DTOs to be used as mock
-        PostDTO dto1 = new PostDTO(1L, "Content 1", LocalDateTime.now(), "Test CreatedBy");
-        PostDTO dto2 = new PostDTO(2L,  "Content 2", LocalDateTime.now(), "Test CreatedBy");
+        PostDTO dto1 = new PostDTO(1L, "Content 1", LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test CreatedBy");
+        PostDTO dto2 = new PostDTO(2L,  "Content 2", LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test CreatedBy");
 
         Mockito.when(postService.findAll()).thenReturn(Flux.just(dto1, dto2));
 
@@ -59,7 +58,7 @@ class PostControllerTest {
     @Test
     void findById_ReturnsMonoOfPost() throws Exception {
         //DTO to be used as mock
-        PostDTO dto = new PostDTO(1L,  "Content 1", LocalDateTime.now(), "Test CreatedBy");
+        PostDTO dto = new PostDTO(1L,  "Content 1", LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test CreatedBy");
 
         Mockito.when(postService.findById(1L)).thenReturn(Mono.just(dto));
 
@@ -77,9 +76,9 @@ class PostControllerTest {
     @Test
     void findById_ReturnsMonoOfPostWithComments() throws Exception {
         //DTOs to be used as mock
-        PostDTO postDTO = new PostDTO(1L,  "Content 1", LocalDateTime.now(), "Test CreatedBy");
-        CommentDTO commentDto1 = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.now(), "Test");
-        CommentDTO commentDto2 = new CommentDTO(2L, "Comment Two", 1L, null, LocalDateTime.now(), "Test");
+        PostDTO postDTO = new PostDTO(1L,  "Content 1", LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test CreatedBy");
+        CommentDTO commentDto1 = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
+        CommentDTO commentDto2 = new CommentDTO(2L, "Comment Two", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
         postDTO.setComments(Arrays.asList(commentDto1, commentDto2));
 
         Mockito.when(postService.findPostWithComments(1L)).thenReturn(Mono.just(postDTO));
@@ -98,8 +97,8 @@ class PostControllerTest {
     @Test
     void save_ReturnsSavedPost() {
         // DTO to be used as mock and request
-        PostDTO dtoToSave = new PostDTO(null,  "Content 1", LocalDateTime.now(), "Test CreatedBy");
-        PostDTO savedDto = new PostDTO(10L,   "Content 1", LocalDateTime.now(), "Test CreatedBy");
+        PostDTO dtoToSave = new PostDTO(null,  "Content 1", LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test CreatedBy");
+        PostDTO savedDto = new PostDTO(10L,   "Content 1", LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test CreatedBy");
 
         Mockito.when(postService.save(any(PostDTO.class))).thenReturn(Mono.just(savedDto));
 

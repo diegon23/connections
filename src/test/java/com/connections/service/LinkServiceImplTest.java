@@ -3,6 +3,7 @@ package com.connections.service;
 import com.connections.dto.LinkDTO;
 import com.connections.entity.LinkEntity;
 import com.connections.repository.LinkRepository;
+import com.connections.service.impl.LinkServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,19 +15,17 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.time.LocalDateTime;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
-class LinkServiceTest {
+class LinkServiceImplTest {
 
     @Mock
     private LinkRepository linkRepository;
 
     @InjectMocks
-    private LinkService linkService;
+    private LinkServiceImpl linkService;
 
     private LinkEntity entity1;
     private LinkEntity entity2;
@@ -36,11 +35,11 @@ class LinkServiceTest {
 
     @BeforeEach
     void setup() {
-        entity1 = new LinkEntity(1L, 1L, "Youtube");
-        entity2 = new LinkEntity(2L, 1L, "Instagram");
+        entity1 = new LinkEntity(1L,"test.com.br", 1L,  "Youtube");
+        entity2 = new LinkEntity(2L, "test.com.br", 1L, "Instagram");
 
-        dto1 = new LinkDTO(1L, 1L, "Youtube");
-        dto2 = new LinkDTO(2L, 1L, "Instagram");
+        dto1 = new LinkDTO(1L, "test.com.br", 1L, "Youtube");
+        dto2 = new LinkDTO(2L, "test.com.br", 1L, "Instagram");
     }
 
     @Test
@@ -81,9 +80,9 @@ class LinkServiceTest {
     @Test
     void save_ShouldReturnSavedLinkDTO() {
         // Objects to use as Mock
-        LinkEntity savedEntity = new LinkEntity(1L, 1L, "Youtube");
-        LinkDTO dtoToSave = new LinkDTO(null, 1L, "Youtube");
-        LinkDTO expectedDTO = new LinkDTO(1L, 1L, "Youtube");
+        LinkEntity savedEntity = new LinkEntity(1L, "test.com.br", 1L, "Youtube");
+        LinkDTO dtoToSave = new LinkDTO(null, "test.com.br", 1L, "Youtube");
+        LinkDTO expectedDTO = new LinkDTO(1L, "test.com.br", 1L, "Youtube");
 
         //Mock Repository call
         Mockito.when(linkRepository.save(any(LinkEntity.class)))

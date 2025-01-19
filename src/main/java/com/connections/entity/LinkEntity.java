@@ -15,6 +15,8 @@ public class LinkEntity {
     @Id
     private Long id;
 
+    private String link;
+
     @Column("creator_id")
     private Long creatorId;
 

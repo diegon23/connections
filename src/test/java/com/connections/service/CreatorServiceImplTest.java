@@ -1,8 +1,13 @@
 package com.connections.service;
 
 import com.connections.dto.CreatorDTO;
+import com.connections.dto.InspirationDTO;
 import com.connections.entity.CreatorEntity;
+import com.connections.entity.InspirationEntity;
+import com.connections.external.musicbrainz.dto.MusicBrainzArtist;
 import com.connections.repository.CreatorRepository;
+import com.connections.repository.InspirationRepository;
+import com.connections.service.impl.CreatorServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,23 +19,35 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
-class CreatorServiceTest {
+class CreatorServiceImplTest {
 
     @Mock
     private CreatorRepository creatorRepository;
 
+    @Mock
+    private InspirationRepository inspirationRepository;
+
+    @Mock
+    private IInspirationService inspirationService;
+
     @InjectMocks
-    private CreatorService creatorService;
+    private CreatorServiceImpl creatorService;
 
     private CreatorEntity entity1;
     private CreatorEntity entity2;
 
     private CreatorDTO dto1;
     private CreatorDTO dto2;
+
+    private MusicBrainzArtist dummyArtist;
+
+    private InspirationEntity dummyInspirationEntity;
 
     @BeforeEach
     void setup() {
@@ -39,6 +56,17 @@ class CreatorServiceTest {
 
         dto1 = new CreatorDTO(1L, "Alice", "she/her", "Bio Alice");
         dto2 = new CreatorDTO(2L, "Bob",   "he/him",  "Bio Bob");
+
+        // A sample external artist data
+        dummyArtist = new MusicBrainzArtist();
+        dummyArtist.setId("someInspirationId");
+        dummyArtist.setName("Radiohead");
+
+        // A sample InspirationEntity to represent what's saved in DB
+        dummyInspirationEntity = new InspirationEntity();
+        dummyInspirationEntity.setId(10L);
+        dummyInspirationEntity.setCreatorId(1L);
+        dummyInspirationEntity.setInspirationName("Radiohead");
     }
 
     @Test
@@ -61,8 +89,13 @@ class CreatorServiceTest {
 
     @Test
     void findById_ShouldReturnMonoOfCreatorDTO() {
+        //DTO to be used as Mock
+        InspirationEntity inspirationEntity = new InspirationEntity(1L, 1L, "Inspiration Test");
+        dto1.setInspirations(List.of(new InspirationDTO(1L, "Inspiration Test")));
+
         // Mock Repository call
         Mockito.when(creatorRepository.findById(1L)).thenReturn(Mono.just(entity1));
+        Mockito.when(inspirationRepository.findByCreatorId(1L)).thenReturn(Flux.just(inspirationEntity));
 
         // Service Call
         Mono<CreatorDTO> result = creatorService.findById(1L);
@@ -74,6 +107,38 @@ class CreatorServiceTest {
 
         // Check if repository.findById() was called
         Mockito.verify(creatorRepository).findById(eq(1L));
+    }
+
+    @Test
+    void testAddInspirationToCreator() {
+        // Mock creatorRepository.findById(...) -> Mono.just(entity1)
+        Mockito.when(creatorRepository.findById(1L))
+                .thenReturn(Mono.just(entity1));
+
+        // Mock inspirationService.findArtistById(...) -> Mono.just(dummyArtist)
+        Mockito.when(inspirationService.findArtistById("someInspirationId"))
+                .thenReturn(Mono.just(dummyArtist));
+
+        // Mock inspirationRepository.save(...) -> Mono.just(dummyInspirationEntity)
+        Mockito.when(inspirationRepository.save(org.mockito.ArgumentMatchers.any(InspirationEntity.class)))
+                .thenReturn(Mono.just(dummyInspirationEntity));
+
+        // Mock inspirationRepository.findByCreatorId(Long) --> Flux.empty()
+        Mockito.when(inspirationRepository.findByCreatorId(any()))
+                .thenReturn(Flux.empty());
+
+        // Call the method under test
+        Mono<InspirationDTO> resultMono = creatorService.addInspirationToCreator(1L, "someInspirationId");
+
+        // Verify with StepVerifier
+        StepVerifier.create(resultMono)
+                .assertNext(inspiration -> {
+                    // The method returns an InspirationDTO
+                    // Confirm the ID, name, etc. match what we expect
+                    org.junit.jupiter.api.Assertions.assertEquals(10L, inspiration.getId());
+                    org.junit.jupiter.api.Assertions.assertEquals("Radiohead", inspiration.getName());
+                })
+                .verifyComplete();
     }
 
     @Test

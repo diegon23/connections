@@ -4,6 +4,7 @@ import com.connections.dto.CommentDTO;
 import com.connections.dto.PostDTO;
 import com.connections.entity.PostEntity;
 import com.connections.repository.PostRepository;
+import com.connections.service.impl.PostServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,17 +23,17 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
-class PostServiceTest {
+class PostServiceImplTest {
 
     @Mock
     private PostRepository postRepository;
 
     // Service Mock
     @Mock
-    private CommentService commentService;
+    private ICommentService commentService;
 
     @InjectMocks
-    private PostService postService;
+    private PostServiceImpl postService;
 
     private PostEntity entity1;
     private PostEntity entity2;
@@ -87,8 +88,8 @@ class PostServiceTest {
     @Test
     void findById_ShouldReturnMonoOfPostDTOWithComments() {
         //DTOs for service call
-        CommentDTO commentDto1 = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.now(), "Test");
-        CommentDTO commentDto2 = new CommentDTO(2L, "Comment Two", 1L, null, LocalDateTime.now(), "Test");
+        CommentDTO commentDto1 = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
+        CommentDTO commentDto2 = new CommentDTO(2L, "Comment Two", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
         dto1.setComments(Arrays.asList(commentDto1, commentDto2));
 
         //Mock service call
@@ -114,9 +115,9 @@ class PostServiceTest {
     @Test
     void save_ShouldReturnSavedPostDTO() {
         // Objects to use as Mock
-        PostEntity savedEntity   = new PostEntity(3L, "Content 1", LocalDateTime.now(), "Test CreatedBy");
-        PostDTO dtoToSave = new PostDTO(null, "Content 1", LocalDateTime.now(), "Test CreatedBy");
-        PostDTO expectedDTO = new PostDTO(3L, "Content 1", LocalDateTime.now(), "Test CreatedBy");
+        PostEntity savedEntity   = new PostEntity(3L, "Content 1", LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test CreatedBy");
+        PostDTO dtoToSave = new PostDTO(null, "Content 1", LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test CreatedBy");
+        PostDTO expectedDTO = new PostDTO(3L, "Content 1", LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test CreatedBy");
 
         //Mock Repository call
         Mockito.when(postRepository.save(any(PostEntity.class)))

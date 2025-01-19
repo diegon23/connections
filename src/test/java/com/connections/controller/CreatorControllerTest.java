@@ -1,7 +1,7 @@
 package com.connections.controller;
 
 import com.connections.dto.CreatorDTO;
-import com.connections.service.CreatorService;
+import com.connections.service.ICreatorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,7 +25,7 @@ class CreatorControllerTest {
 
     // Service Mock
     @MockBean
-    private CreatorService creatorService;
+    private ICreatorService creatorService;
 
     @BeforeEach
     void setUp() {

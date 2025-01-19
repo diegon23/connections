@@ -1,7 +1,7 @@
 package com.connections.controller;
 
 import com.connections.dto.RsvpDTO;
-import com.connections.service.RsvpService;
+import com.connections.service.IRsvpService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -27,7 +27,7 @@ class RsvpControllerTest {
 
     // Service Mock
     @MockBean
-    private RsvpService rsvpService;
+    private IRsvpService rsvpService;
 
     //
     @BeforeEach
@@ -37,8 +37,8 @@ class RsvpControllerTest {
     @Test
     void findAll_ReturnsFluxOfRsvps() throws Exception {
         // DTOs to be used as mock
-        RsvpDTO dto1 = new RsvpDTO(1L, 1L, 1L, "Test Status", LocalDateTime.now());
-        RsvpDTO dto2 = new RsvpDTO(2L,  1L, 1L, "Test Status", LocalDateTime.now());
+        RsvpDTO dto1 = new RsvpDTO(1L, 1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
+        RsvpDTO dto2 = new RsvpDTO(2L,  1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
 
         Mockito.when(rsvpService.findAll()).thenReturn(Flux.just(dto1, dto2));
 
@@ -55,7 +55,7 @@ class RsvpControllerTest {
     @Test
     void findById_ReturnsMonoOfRsvp() throws Exception {
         //DTO to be used as mock
-        RsvpDTO dto = new RsvpDTO(1L,  1L, 1L, "Test Status", LocalDateTime.now());
+        RsvpDTO dto = new RsvpDTO(1L,  1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
 
         Mockito.when(rsvpService.findById(1L)).thenReturn(Mono.just(dto));
 
@@ -73,8 +73,8 @@ class RsvpControllerTest {
     @Test
     void save_ReturnsSavedRsvp() {
         // DTO to be used as mock and request
-        RsvpDTO dtoToSave = new RsvpDTO(null,  1L, 1L, "Test Status", LocalDateTime.now());
-        RsvpDTO savedDto = new RsvpDTO(10L,   1L, 1L, "Test Status", LocalDateTime.now());
+        RsvpDTO dtoToSave = new RsvpDTO(null,  1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
+        RsvpDTO savedDto = new RsvpDTO(10L,   1L, 1L, "Test Status", LocalDateTime.of(2025,1,18,11,46,31,496193900));
 
         Mockito.when(rsvpService.save(any(RsvpDTO.class))).thenReturn(Mono.just(savedDto));
 
