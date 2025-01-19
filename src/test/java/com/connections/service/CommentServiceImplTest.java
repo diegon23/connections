@@ -3,6 +3,7 @@ package com.connections.service;
 import com.connections.dto.CommentDTO;
 import com.connections.entity.CommentEntity;
 import com.connections.repository.CommentRepository;
+import com.connections.service.impl.CommentServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,13 +21,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
-class CommentServiceTest {
+class CommentServiceImplTest {
 
     @Mock
     private CommentRepository commentRepository;
 
     @InjectMocks
-    private CommentService commentService;
+    private CommentServiceImpl commentService;
 
     private CommentEntity entity1;
     private CommentEntity entity2;
@@ -36,11 +37,11 @@ class CommentServiceTest {
 
     @BeforeEach
     void setup() {
-        entity1 = new CommentEntity(1L, "Comment One", 1L, null, LocalDateTime.now(), "Test");
-        entity2 = new CommentEntity(2L, "Comment Two", 1L, null, LocalDateTime.now(), "Test");
+        entity1 = new CommentEntity(1L, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
+        entity2 = new CommentEntity(2L, "Comment Two", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
 
-        dto1 = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.now(), "Test");
-        dto2 = new CommentDTO(2L, "Comment Two", 1L, null, LocalDateTime.now(), "Test");
+        dto1 = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
+        dto2 = new CommentDTO(2L, "Comment Two", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
     }
 
     @Test
@@ -81,9 +82,9 @@ class CommentServiceTest {
     @Test
     void save_ShouldReturnSavedCommentDTO() {
         // Objects to use as Mock
-        CommentEntity savedEntity = new CommentEntity(1L, "Comment One", 1L, null, LocalDateTime.now(), "Test");
-        CommentDTO dtoToSave = new CommentDTO(null, "Comment One", 1L, null, LocalDateTime.now(), "Test");
-        CommentDTO expectedDTO = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.now(), "Test");
+        CommentEntity savedEntity = new CommentEntity(1L, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
+        CommentDTO dtoToSave = new CommentDTO(null, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
+        CommentDTO expectedDTO = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
 
         //Mock Repository call
         Mockito.when(commentRepository.save(any(CommentEntity.class)))

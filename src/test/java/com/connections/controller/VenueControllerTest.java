@@ -1,7 +1,7 @@
 package com.connections.controller;
 
 import com.connections.dto.VenueDTO;
-import com.connections.service.VenueService;
+import com.connections.service.IVenueService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,8 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -27,7 +25,7 @@ class VenueControllerTest {
 
     // Service Mock
     @MockBean
-    private VenueService venueService;
+    private IVenueService venueService;
 
     //
     @BeforeEach

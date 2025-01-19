@@ -1,22 +1,23 @@
-package com.connections.dto;
+package com.connections.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-import java.time.LocalDateTime;
-
+@Table("inspiration")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LinkDTO {
+public class InspirationEntity {
+    @Id
     private Long id;
 
-    private String link;
-
+    @Column("creator_id")
     private Long creatorId;
 
-    private String description;
+    @Column("inspiration_name")
+    private String inspirationName;
 }

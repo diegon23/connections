@@ -1,9 +1,7 @@
 package com.connections.controller;
 
 import com.connections.dto.CommentDTO;
-import com.connections.dto.CommentDTO;
-import com.connections.service.CommentService;
-import com.connections.service.CommentService;
+import com.connections.service.ICommentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -29,7 +27,7 @@ class CommentControllerTest {
 
     // Service Mock
     @MockBean
-    private CommentService commentService;
+    private ICommentService commentService;
 
     //
     @BeforeEach
@@ -39,8 +37,8 @@ class CommentControllerTest {
     @Test
     void findAll_ReturnsFluxOfComments() throws Exception {
         // DTOs to be used as mock
-        CommentDTO dto1 = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.now(), "Test");
-        CommentDTO dto2 = new CommentDTO(2L, "Comment Two", 1L, null, LocalDateTime.now(), "Test");
+        CommentDTO dto1 = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
+        CommentDTO dto2 = new CommentDTO(2L, "Comment Two", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
 
         Mockito.when(commentService.findAll()).thenReturn(Flux.just(dto1, dto2));
 
@@ -57,7 +55,7 @@ class CommentControllerTest {
     @Test
     void findById_ReturnsMonoOfComment() throws Exception {
         //DTO to be used as mock
-        CommentDTO dto = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.now(), "Test");
+        CommentDTO dto = new CommentDTO(1L, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
 
         Mockito.when(commentService.findById(1L)).thenReturn(Mono.just(dto));
 
@@ -75,8 +73,8 @@ class CommentControllerTest {
     @Test
     void save_ReturnsSavedComment() {
         // DTO to be used as mock and request
-        CommentDTO dtoToSave = new CommentDTO(null, "Comment One", 1L, null, LocalDateTime.now(), "Test");
-        CommentDTO savedDto = new CommentDTO(10L, "Comment One", 1L, null, LocalDateTime.now(), "Test");
+        CommentDTO dtoToSave = new CommentDTO(null, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
+        CommentDTO savedDto = new CommentDTO(10L, "Comment One", 1L, null, LocalDateTime.of(2025,1,18,11,46,31,496193900), "Test");
 
         Mockito.when(commentService.save(any(CommentDTO.class))).thenReturn(Mono.just(savedDto));
 

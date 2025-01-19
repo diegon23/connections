@@ -3,6 +3,7 @@ package com.connections.service;
 import com.connections.dto.EventDTO;
 import com.connections.entity.EventEntity;
 import com.connections.repository.EventRepository;
+import com.connections.service.impl.EventServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,13 +21,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
-class EventServiceTest {
+class EventServiceImplTest {
 
     @Mock
     private EventRepository eventRepository;
 
     @InjectMocks
-    private EventService eventService;
+    private EventServiceImpl eventService;
 
     private EventEntity entity1;
     private EventEntity entity2;
@@ -81,9 +82,9 @@ class EventServiceTest {
     @Test
     void save_ShouldReturnSavedEventDTO() {
         // Objects to use as Mock
-        EventEntity savedEntity = new EventEntity(1L, "Event One", "Test Description", LocalDateTime.now(), 1L);
-        EventDTO dtoToSave = new EventDTO(null, "Event One", "Test Description", LocalDateTime.now(), 1L);
-        EventDTO expectedDTO = new EventDTO(1L, "Event One", "Test Description", LocalDateTime.now(), 1L);
+        EventEntity savedEntity = new EventEntity(1L, "Event One", "Test Description", LocalDateTime.of(2025,1,18,11,46,31,496193900), 1L);
+        EventDTO dtoToSave = new EventDTO(null, "Event One", "Test Description", LocalDateTime.of(2025,1,18,11,46,31,496193900), 1L);
+        EventDTO expectedDTO = new EventDTO(1L, "Event One", "Test Description", LocalDateTime.of(2025,1,18,11,46,31,496193900), 1L);
 
         //Mock Repository call
         Mockito.when(eventRepository.save(any(EventEntity.class)))

@@ -26,6 +26,7 @@ Welcome to **Connections**, a project designed to practice **Spring Boot**, **We
 1. **Practice** building RESTful APIs with **Spring Boot** and **reactive programming** (Spring WebFlux).
 2. **Explore** entity relationships among `Creator`, `Event`, `Venue`, `Post`, `Comment`, and `Rsvp`.
 3. **Demonstrate** how to document endpoints using **OpenAPI/Swagger**.
+4. **Integrate** external services like **MusicBrainz** to enhance creator profiles with inspirations.
 
 ---
 
@@ -38,6 +39,7 @@ Welcome to **Connections**, a project designed to practice **Spring Boot**, **We
 - **Post**: Created by a `Creator` and can have multiple comments.
 - **Comment**: A comment on a `Post` or an `Event`.
 - **Link**: (Optional) Represents a link or reference associated with a creator (e.g., social media).
+- **Inspiration**: Represents inspirations linked to a creator, fetched from the external **MusicBrainz** service.
 
 ---
 
@@ -49,7 +51,7 @@ All endpoints follow a consistent pattern:
 - `GET /{resource}/id/{id}` to retrieve by ID
 - `DELETE /{resource}/id/{id}` to delete by ID
 
-Additionally, certain resources have specialized endpoints, like `/post/id/{id}/comments` to retrieve a post with its comments.
+Additionally, certain resources have specialized endpoints, like `/post/id/{id}/comments` to retrieve a post with its comments or `/creator/add-inspiration` to associate inspirations with creators.
 
 Examples:
 
@@ -60,7 +62,7 @@ Examples:
 | **Post**    | `POST /post` <br> `GET /post/all` <br> `GET /post/id/{id}` <br> `DELETE /post/id/{id}` <br> `GET /post/id/{id}/comments`             |
 | **Link**    | `POST /link` <br> `GET /link/all` <br> `GET /link/id/{id}` <br> `DELETE /link/id/{id}`                                               |
 | **Event**   | `POST /event` <br> `GET /event/all` <br> `GET /event/id/{id}` <br> `DELETE /event/id/{id}`                                           |
-| **Creator** | `POST /creator` <br> `GET /creator/all` <br> `GET /creator/id/{id}` <br> `DELETE /creator/id/{id}`                                   |
+| **Creator**  | `POST /creator` <br> `GET /creator/all` <br> `GET /creator/id/{id}` <br> `DELETE /creator/id/{id}` <br> `POST /creator/add-inspiration` |
 | **Comment** | `POST /comment` <br> `GET /comment/all` <br> `GET /comment/id/{id}` <br> `DELETE /comment/id/{id}`                                   |
 
 For detailed information (parameters, request examples, etc.), refer to the [OpenAPI documentation](#api-usage).
@@ -188,6 +190,13 @@ Some examples:
     "description": "Social media or reference link"
   }
   ```
+- **InspirationDTO**:
+  ```json
+  {
+    "id": 0,
+    "name": "Radiohead"
+  }
+  ```
 
 For the full list of properties and details, see the [OpenAPI documentation](#api-usage).
 
@@ -208,3 +217,24 @@ Feedback, issues, and new ideas are welcome!
 
 **Thank you for checking out Connections!**  
 Feel free to test, send feedback, and enhance this project as you see fit. Enjoy!
+
+## Additional Information
+
+### Inspiration Integration
+
+**Connections** integrates with the **MusicBrainz** external service to fetch and associate inspirations with creators. This allows creators to enrich their profiles with influences and inspirations sourced from a comprehensive music database.
+- **Finding an Artist**:
+    - Endpoint: `GET /inspiration/name/{name}`
+    - Parameters:
+        - `name` (String): The ID of the Artist on MusicBrainz API.
+    - Description: This endpoint fetches the all artist details from MusicBrainz using the provided `name`.
+
+
+- **Adding an Inspiration**:
+    - Endpoint: `POST /creator/add-inspiration`
+    - Parameters:
+        - `creatorId` (Long): The ID of the creator to whom the inspiration will be added.
+        - `inspirationId` (String): The MusicBrainz ID of the artist to be added as inspiration.
+    - Description: This endpoint fetches the artist details from MusicBrainz using the provided `inspirationId` and associates it with the specified creator.
+
+---
